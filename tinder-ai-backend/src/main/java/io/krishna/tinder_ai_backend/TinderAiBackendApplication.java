@@ -3,6 +3,7 @@ package io.krishna.tinder_ai_backend;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +25,9 @@ public class TinderAiBackendApplication implements CommandLineRunner{
 	@Autowired
 	private ConversationRepository conversationRepository;
 
+	@Autowired
+	private OpenAiChatModel chatModel;
+
 	public static void main(String[] args) {
 		SpringApplication.run(TinderAiBackendApplication.class, args);
 	}
@@ -31,6 +35,10 @@ public class TinderAiBackendApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) {
 		System.out.println("app is running");
+
+		String response = chatModel.call("Who is Dhoni");
+		System.out.println(response);
+		
 		Profile profile = new Profile(
 			"1",
 			"Gopikrishna",
